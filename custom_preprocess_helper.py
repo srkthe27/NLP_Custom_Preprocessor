@@ -34,6 +34,7 @@ class CustomNNLPDatasetOp:
         df[self.text_col] = df[self.text_col].astype(str).str.lower()
         return df
     
+    # Main Function
     def run_dataset_operations(self, verbose=False):
         self.dataset_info()
         cleaned_df = self.remove_duplicates_to_lowercase(verbose=verbose)
@@ -180,6 +181,7 @@ class CustomVisualizationHelper:
         plt.ylabel('Words')
         plt.show()
 
+    # Main visualization function
     def visualize(self):
         self.basic_plots()
         self.create_ngram()
