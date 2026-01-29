@@ -161,7 +161,7 @@ class CustomVisualizationHelper:
         plt.show()
     # --- IGNORE ---
 
-    def plot_top_n_words(n=20):
+    def plot_top_n_words(self,n=20):
         """Plot the top N most frequent words in the dataset."""
         # Flatten all words in the content column
         words = ' '.join(self.df[self.clean_text]).split()
