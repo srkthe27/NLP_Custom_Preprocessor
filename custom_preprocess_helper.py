@@ -115,6 +115,8 @@ class CustomVisualizationHelper:
         self.word_count = word_count
         self.no_of_stopwords = no_of_stopwords
         self.clean_text = clean_text
+        self.wordcloud = WordCloud(width=800, height=400, background_color='white')
+        self.vectorizer = CountVectorizer(ngram_range=(2, 2), stop_words='english')
 
     def basic_plots(self):
 
@@ -134,8 +136,8 @@ class CustomVisualizationHelper:
         plt.legend()
         plt.show()
 
-    def get_top_ngrams(corpus, n=None):
-        vec = CountVectorizer(ngram_range=(2, 2), stop_words='english').fit(corpus)
+    def get_top_ngrams(self, corpus, n=None):
+        vec = self.vectorizer.fit(corpus)
         bag_of_words = vec.transform(corpus)
         sum_words = bag_of_words.sum(axis=0)
         words_freq = [(word, sum_words[0, idx]) for word, idx in vec.vocabulary_.items()]
@@ -155,9 +157,9 @@ class CustomVisualizationHelper:
 
     # --- IGNORE ---
     def generate_wordcloud(self):
-        wordcloud = WordCloud(width=800, height=400, background_color='white').generate(' '.join(self.df[self.clean_text]))
+        wc = self.wordcloud.generate(' '.join(self.df[self.clean_text]))
         plt.figure(figsize=(10, 5))
-        plt.imshow(wordcloud, interpolation='bilinear')
+        plt.imshow(wc, interpolation='bilinear')
         plt.axis("off")
         plt.show()
     # --- IGNORE ---
