@@ -141,19 +141,20 @@ class CustomVisualizationHelper:
         words_freq = sorted(words_freq, key=lambda x: x[1], reverse=True)
         return words_freq[:n]
 
-    top_25_bigrams = self.get_top_ngrams(self.df[self.clean_text], 25)
-    top_25_bigrams_df = pd.DataFrame(top_25_bigrams, columns=['bigram', 'count'])
+    def create_ngram(self):
+        top_25_bigrams = self.get_top_ngrams(self.df[self.clean_text], 25)
+        top_25_bigrams_df = pd.DataFrame(top_25_bigrams, columns=['bigram', 'count'])
 
-    plt.figure(figsize=(12, 8))
-    sns.barplot(data=top_25_bigrams_df, x='count', y='bigram', palette='magma')
-    plt.title('Top 25 Most Common Bigrams')
-    plt.xlabel('Count')
-    plt.ylabel('Bigram')
-    plt.show()
+        plt.figure(figsize=(12, 8))
+        sns.barplot(data=top_25_bigrams_df, x='count', y='bigram', palette='magma')
+        plt.title('Top 25 Most Common Bigrams')
+        plt.xlabel('Count')
+        plt.ylabel('Bigram')
+        plt.show()
 
     # --- IGNORE ---
-    def generate_wordcloud():
-        wordcloud = WordCloud(width=800, height=400, background_color='white').generate(' '.join(text))
+    def generate_wordcloud(self):
+        wordcloud = WordCloud(width=800, height=400, background_color='white').generate(' '.join(self.df[self.clean_text]))
         plt.figure(figsize=(10, 5))
         plt.imshow(wordcloud, interpolation='bilinear')
         plt.axis("off")
@@ -178,3 +179,9 @@ class CustomVisualizationHelper:
         plt.xlabel('Frequency')
         plt.ylabel('Words')
         plt.show()
+
+    def visualize(self):
+        self.basic_plots()
+        self.create_ngram()
+        self.generate_wordcloud()
+        self.plot_top_n_words()
