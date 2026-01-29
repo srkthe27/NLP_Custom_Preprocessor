@@ -164,16 +164,12 @@ class CustomVisualizationHelper:
 
     def plot_top_n_words(self,n=20):
         """Plot the top N most frequent words in the dataset."""
-        # Flatten all words in the content column
-        words = ' '.join(self.df[self.clean_text]).split()
 
+        words = ' '.join(self.df[self.clean_text]).split()
         counter = Counter(words)
         most_common_words = counter.most_common(n)
-
-        # Split the words and their counts for plotting
         words, counts = zip(*most_common_words)
 
-        # Plot the top N words
         plt.figure(figsize=(10, 6))
         sns.barplot(x=list(counts), y=list(words))
         plt.title(f'Top {n} Most Frequent Words')
