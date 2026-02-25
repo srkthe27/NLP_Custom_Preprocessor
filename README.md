@@ -65,7 +65,7 @@ Provides powerful visualizations:
 # 📦 Installation
 
 ``` bash
-pip install pandas numpy matplotlib seaborn nltk scikit-learn wordcloud
+pip install requirements.txt
 ```
 
 Download required NLTK resources:
